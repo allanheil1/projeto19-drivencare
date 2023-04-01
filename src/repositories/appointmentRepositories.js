@@ -50,6 +50,7 @@ async function searchByDoctor(doctorId) {
     return await connectionDb.query(
         `
         SELECT 
+            a.id AS appointment_id,
             p.name AS patient_name, 
             d.specialty AS doctor_specialty, 
             a.appoint_date AS appointment_date, 

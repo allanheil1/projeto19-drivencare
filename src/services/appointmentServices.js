@@ -3,10 +3,7 @@ import errors from '../errors/index.js';
 
 async function create({ patientId, doctorId, date, hour, status }) {
 
-    console.log(date, hour, doctorId)
-    console.log('antes')
     const doctorAppointments = await appointmentRepositories.verifyDateDoctor({ date, hour, doctorId });
-    console.log('depois')
 
     if (doctorAppointments.rowCount) {
         throw errors.conflictError('Doctor date is unavailable');
