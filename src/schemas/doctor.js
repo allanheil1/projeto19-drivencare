@@ -6,4 +6,4 @@ export const doctorSchema = joi.object({
     password: joi.string().required(),
     specialty: joi.string().required(),
     location: joi.string().required()
-})
+});
