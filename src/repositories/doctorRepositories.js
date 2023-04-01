@@ -32,8 +32,20 @@ async function findById(id){
     );
 }
 
+async function search({ name, specialty, location }){
+    return await connectionDb.query(
+        `
+        SELECT *
+        FROM   doctors
+        WHERE  name = $1 OR specialty = $2 OR location = $3
+        `,
+        [name, specialty, location]
+    );
+}
+
 export default {
     findByEmail,
     create,
-    findById
+    findById,
+    search
 }

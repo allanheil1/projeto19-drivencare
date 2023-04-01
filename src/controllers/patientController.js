@@ -38,5 +38,5 @@ async function signIn(req, res, next){
 
 export default {
     create, 
-    signIn
+    signIn,
 };

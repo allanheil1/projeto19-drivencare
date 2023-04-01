@@ -33,7 +33,17 @@ async function signIn({ email, password }){
 
 }
 
+async function search({ name, specialty, location }){
+
+    const {rowCount, rows: doctors} = await doctorRepositories.search({ name, specialty, location });
+
+    if(!rowCount) throw errors.notFoundError();
+
+    return doctors;
+}
+
 export default {
     create, 
-    signIn
+    signIn,
+    search
 }
