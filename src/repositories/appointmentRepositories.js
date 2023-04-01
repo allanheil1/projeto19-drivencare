@@ -65,10 +65,44 @@ async function searchByDoctor(doctorId) {
     );
 }
 
+async function findById(appointmentId){
+    return await connectionDb.query(
+        `
+        SELECT * FROM appointments
+        WHERE id=$1
+        `,
+        [appointmentId]
+    );
+}
+
+async function confirm(appointmentId){
+    return await connectionDb.query(
+        `
+        UPDATE appointments
+        SET status=$1
+        WHERE id=$2
+        `,
+        ['confirmed', appointmentId]
+    );
+}
+
+async function cancel(appointmentId){
+    return await connectionDb.query(
+        `
+        UPDATE appointments
+        SET status=$1
+        WHERE id=$2
+        `,
+        ['canceled', appointmentId]
+    );
+}
 export default {
     create,
     verifyDateDoctor,
     verifyDatePatient,
     searchByPatient,
     searchByDoctor,
+    findById,
+    confirm,
+    cancel,
 }

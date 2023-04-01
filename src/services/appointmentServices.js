@@ -42,9 +42,37 @@ async function searchByDoctor(doctorId) {
 
 }
 
+async function confirm({doctorId, appointmentId}) {
+
+    const { rowCount, rows: [appointment] } = await appointmentRepositories.findById(appointmentId);
+
+    if (!rowCount) throw errors.notFoundError();
+
+    if(doctorId !== appointment.doctor_id) throw errors.appointmentUnauthorized();
+
+    if(appointment.status === 'canceled') throw errors.appointmentIsCanceled();
+
+    await appointmentRepositories.confirm(appointmentId);
+
+}
+
+async function cancel({doctorId, appointmentId}) {
+
+    const { rowCount, rows: [appointment] } = await appointmentRepositories.findById(appointmentId);
+
+    if (!rowCount) throw errors.notFoundError();
+
+    if(doctorId !== appointment.doctor_id) throw errors.appointmentUnauthorized();
+
+    await appointmentRepositories.cancel(appointmentId);
+
+}
+
 
 export default {
     create,
     searchByPatient,
     searchByDoctor,
+    confirm,
+    cancel,
 }

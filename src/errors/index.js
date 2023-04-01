@@ -19,6 +19,20 @@ function conflictError(message) {
       message: "You must be signed in to continue",
     };
   }
+
+  function appointmentUnauthorized(){
+    return {
+      name: "UnauthorizedAction",
+      message: "This appointment belongs to another doctor"
+    }
+  }
+
+  function appointmentIsCanceled(){
+    return {
+      name: "InvalidAppointmentConfirm",
+      message: "This appointment has already been canceled and can't be confirmed"
+    }
+  }
   
   function notFoundError() {
     return {
@@ -40,5 +54,7 @@ function conflictError(message) {
     unauthorizedError,
     notFoundError,
     invalidCredentialsError,
+    appointmentUnauthorized,
+    appointmentIsCanceled,
   };
   

@@ -9,5 +9,7 @@ const appointmentRoutes = Router();
 appointmentRoutes.post('/', tokenValidatePatient, validateSchema(appointmentSchema), appointmentController.create);
 appointmentRoutes.get('/patient', tokenValidatePatient, appointmentController.searchByPatient);
 appointmentRoutes.get('/doctor', tokenValidateDoctor, appointmentController.searchByDoctor);
+appointmentRoutes.post('/confirm/:id', tokenValidateDoctor, appointmentController.confirm);
+appointmentRoutes.post('/cancel/:id', tokenValidateDoctor, appointmentController.cancel);
 
 export default appointmentRoutes;

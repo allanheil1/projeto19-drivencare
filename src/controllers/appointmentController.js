@@ -56,8 +56,48 @@ async function searchByDoctor(req, res, next) {
 
 }
 
+async function confirm(req, res, next) {
+
+    const doctorId = res.locals.doctorId;
+    const appointmentId  = +req.params.id;
+
+    try {
+
+        await appointmentServices.confirm({ doctorId, appointmentId });
+
+        return res.sendStatus(200);
+
+    } catch (err) {
+
+        next(err);
+
+    }
+
+}
+
+async function cancel(req, res, next) {
+
+    const doctorId = res.locals.doctorId;
+    const appointmentId  = +req.params.id;
+
+    try {
+
+        await appointmentServices.cancel({ doctorId, appointmentId });
+
+        return res.sendStatus(200);
+
+    } catch (err) {
+
+        next(err);
+
+    }
+
+}
+
 export default {
     create,
     searchByPatient,
-    searchByDoctor
+    searchByDoctor, 
+    confirm,
+    cancel,
 }
