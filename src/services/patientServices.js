@@ -23,7 +23,7 @@ async function signIn({ email, password }){
 
     if(!rowCount) throw errors.invalidCredentialsError();
 
-    const validPassword = bcrypt.compare(password, patient.password);
+    const validPassword = bcrypt.compareSync(password, patient.password);
 
     if(!validPassword) throw errors.invalidCredentialsError();
 
