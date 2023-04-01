@@ -17,8 +17,8 @@ async function create({ name, email, password }){
             INSERT INTO patients (name, email, password)
             VALUES ($1, $2, $3)
         `,
-        [name, email, password])
-    ;
+        [name, email, password]
+        );
 }
 
 async function findById(id){

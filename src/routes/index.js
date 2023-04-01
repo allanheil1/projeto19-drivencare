@@ -6,7 +6,7 @@ import appointmentRoutes from './appointmentRoutes.js';
 const routes = Router();
 
 routes.use('/patient', patientRoutes);
-routes.use('/doctors', doctorRoutes);
+routes.use('/doctor', doctorRoutes);
 routes.use('/appointment', appointmentRoutes);
 
 export default routes;

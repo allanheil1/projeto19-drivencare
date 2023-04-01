@@ -17,7 +17,7 @@ async function create ({ name, email, password }){
 
 }
 
-async function signIn({email, password}){
+async function signIn({ email, password }){
 
     const { rowCount, rows: [patient]} = await patientRepositories.findByEmail(email);
 
