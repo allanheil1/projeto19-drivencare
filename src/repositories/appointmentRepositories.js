@@ -62,6 +62,24 @@ async function searchByPatient(patientId) {
     );
 }
 
+async function searchByPatientDone(patientId) {
+    return await connectionDb.query(
+        `
+        SELECT 
+            d.name AS doctor_name, 
+            d.specialty AS doctor_specialty, 
+            a.appoint_date AS appointment_date, 
+            a.appoint_hour AS appointment_hour,
+            a.status AS status
+        FROM appointments a
+        JOIN doctors d 
+            ON a.doctor_id = d.id
+        WHERE a.patient_id=$1 AND a.status='done'
+        `,
+        [patientId]
+    );
+}
+
 async function searchByDoctor(doctorId) {
     return await connectionDb.query(
         `
@@ -69,14 +87,35 @@ async function searchByDoctor(doctorId) {
             a.id AS appointment_id,
             p.name AS patient_name, 
             d.specialty AS doctor_specialty, 
-            a.appoint_date AS appointment_date, 
-            a.appoint_hour AS appointment_hour
+            a.appoint_date AS date, 
+            a.appoint_hour AS hour
         FROM appointments a
         JOIN patients p
             ON a.patient_id = p.id
         JOIN doctors d
             ON a.doctor_id = d.id
         WHERE a.doctor_id=$1
+        `,
+        [doctorId]
+    );
+}
+
+async function searchByDoctorDone(doctorId) {
+    return await connectionDb.query(
+        `
+        SELECT 
+            a.id AS appointment_id,
+            p.name AS patient_name, 
+            d.specialty AS doctor_specialty, 
+            a.appoint_date AS date, 
+            a.appoint_hour AS hour,
+            a.status AS stauts
+        FROM appointments a
+        JOIN patients p
+            ON a.patient_id = p.id
+        JOIN doctors d
+            ON a.doctor_id = d.id
+        WHERE a.doctor_id=$1 AND a.status='done'
         `,
         [doctorId]
     );
@@ -131,6 +170,8 @@ export default {
     verifyDatePatient,
     searchByPatient,
     searchByDoctor,
+    searchByPatientDone,
+    searchByDoctorDone,
     findById,
     confirm,
     cancel,

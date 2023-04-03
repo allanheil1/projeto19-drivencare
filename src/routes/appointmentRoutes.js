@@ -11,6 +11,9 @@ appointmentRoutes.post('/', tokenValidatePatient, validateSchema(appointmentSche
 appointmentRoutes.get('/patient', tokenValidatePatient, appointmentController.searchByPatient);
 appointmentRoutes.get('/doctor', tokenValidateDoctor, appointmentController.searchByDoctor);
 
+appointmentRoutes.get('/patient/done', tokenValidatePatient, appointmentController.searchByPatientDone);
+appointmentRoutes.get('/doctor/done', tokenValidateDoctor, appointmentController.searchByDoctorDone);
+
 appointmentRoutes.post('/confirm/:id', tokenValidateDoctor, appointmentController.confirm);
 appointmentRoutes.post('/cancel/:id', tokenValidateDoctor, appointmentController.cancel);
 appointmentRoutes.post('/done/:id', tokenValidateDoctor, appointmentController.done);

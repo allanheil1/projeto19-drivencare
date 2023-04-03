@@ -38,6 +38,24 @@ async function searchByPatient(req, res, next) {
 
 }
 
+async function searchByPatientDone(req, res, next) {
+
+    const patientId = res.locals.patientId;
+
+    try {
+
+        const appointments = await appointmentServices.searchByPatientDone(patientId);
+
+        return res.send(appointments);
+
+    } catch (err) {
+
+        next(err);
+
+    }
+
+}
+
 async function searchByDoctor(req, res, next) {
 
     const doctorId = res.locals.doctorId;
@@ -45,6 +63,25 @@ async function searchByDoctor(req, res, next) {
     try {
 
         const appointments = await appointmentServices.searchByDoctor(doctorId);
+
+        return res.send(appointments);
+
+    } catch (err) {
+
+        next(err);
+
+    }
+
+}
+
+
+async function searchByDoctorDone(req, res, next) {
+
+    const doctorId = res.locals.doctorId;
+
+    try {
+
+        const appointments = await appointmentServices.searchByDoctorDone(doctorId);
 
         return res.send(appointments);
 
@@ -117,6 +154,8 @@ export default {
     create,
     searchByPatient,
     searchByDoctor, 
+    searchByPatientDone,
+    searchByDoctorDone, 
     confirm,
     cancel,
     done,

@@ -29,9 +29,29 @@ async function searchByPatient(patientId) {
 
 }
 
+async function searchByPatientDone(patientId) {
+
+    const { rowCount, rows: appointments } = await appointmentRepositories.searchByPatientDone(patientId);
+
+    if (!rowCount) throw errors.notFoundError();
+
+    return appointments;
+
+}
+
 async function searchByDoctor(doctorId) {
 
     const { rowCount, rows: appointments } = await appointmentRepositories.searchByDoctor(doctorId);
+
+    if (!rowCount) throw errors.notFoundError();
+
+    return appointments;
+
+}
+
+async function searchByDoctorDone(doctorId) {
+
+    const { rowCount, rows: appointments } = await appointmentRepositories.searchByDoctorDone(doctorId);
 
     if (!rowCount) throw errors.notFoundError();
 
@@ -83,6 +103,8 @@ export default {
     create,
     searchByPatient,
     searchByDoctor,
+    searchByPatientDone,
+    searchByDoctorDone,
     confirm,
     cancel,
     done,
