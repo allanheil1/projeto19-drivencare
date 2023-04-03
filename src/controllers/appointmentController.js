@@ -94,10 +94,30 @@ async function cancel(req, res, next) {
 
 }
 
+async function done(req, res, next) {
+
+    const doctorId = res.locals.doctorId;
+    const appointmentId  = +req.params.id;
+
+    try {
+
+        await appointmentServices.done({ doctorId, appointmentId });
+
+        return res.sendStatus(200);
+
+    } catch (err) {
+
+        next(err);
+
+    }
+
+}
+
 export default {
     create,
     searchByPatient,
     searchByDoctor, 
     confirm,
     cancel,
+    done,
 }

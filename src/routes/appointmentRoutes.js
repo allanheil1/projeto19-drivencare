@@ -13,5 +13,6 @@ appointmentRoutes.get('/doctor', tokenValidateDoctor, appointmentController.sear
 
 appointmentRoutes.post('/confirm/:id', tokenValidateDoctor, appointmentController.confirm);
 appointmentRoutes.post('/cancel/:id', tokenValidateDoctor, appointmentController.cancel);
+appointmentRoutes.post('/done/:id', tokenValidateDoctor, appointmentController.done);
 
 export default appointmentRoutes;

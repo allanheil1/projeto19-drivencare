@@ -113,6 +113,18 @@ async function cancel(appointmentId){
         ['canceled', appointmentId]
     );
 }
+
+async function done(appointmentId){
+    return await connectionDb.query(
+        `
+        UPDATE appointments
+        SET status=$1
+        WHERE id=$2
+        `,
+        ['done', appointmentId]
+    );
+}
+
 export default {
     create,
     verifyDateDoctor,
@@ -122,4 +134,5 @@ export default {
     findById,
     confirm,
     cancel,
+    done,
 }

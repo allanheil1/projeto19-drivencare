@@ -65,6 +65,17 @@ async function cancel({doctorId, appointmentId}) {
 
 }
 
+async function done({doctorId, appointmentId}) {
+
+    const { rowCount, rows: [appointment] } = await appointmentRepositories.findById(appointmentId);
+
+    if (!rowCount) throw errors.notFoundError();
+
+    if(doctorId !== appointment.doctor_id) throw errors.appointmentUnauthorized();
+
+    await appointmentRepositories.done(appointmentId);
+
+}
 
 export default {
     create,
@@ -72,4 +83,5 @@ export default {
     searchByDoctor,
     confirm,
     cancel,
+    done,
 }
