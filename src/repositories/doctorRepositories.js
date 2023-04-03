@@ -14,8 +14,17 @@ async function findByEmail(email){
 async function create({ name, email, password, specialty, location }){
     return await connectionDb.query(
         `
-            INSERT INTO doctors (name, email, password, specialty, location)
-            VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO doctors
+        (NAME,
+         email,
+         password,
+         specialty,
+         location)
+        VALUES      ($1,
+         $2,
+         $3,
+         $4,
+         $5) 
         `,
         [name, email, password, specialty, location]
     );
@@ -37,7 +46,9 @@ async function search({ name, specialty, location }){
         `
         SELECT *
         FROM   doctors
-        WHERE  name = $1 OR specialty = $2 OR location = $3
+        WHERE  NAME = $1
+                OR specialty = $2
+                OR location = $3 
         `,
         [name, specialty, location]
     );
