@@ -73,6 +73,8 @@ async function done({doctorId, appointmentId}) {
 
     if(doctorId !== appointment.doctor_id) throw errors.appointmentUnauthorized();
 
+    if(appointment.status === 'done') throw errors.appointmentIsDone();
+
     await appointmentRepositories.done(appointmentId);
 
 }

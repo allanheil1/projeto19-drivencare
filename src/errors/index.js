@@ -33,6 +33,13 @@ function conflictError(message) {
       message: "This appointment has already been canceled and can't be confirmed"
     }
   }
+
+  function appointmentIsDone(){
+    return {
+      name: "InvalidAppointmentDone",
+      message: "This appointment has already been marked as done"
+    }
+  }
   
   function notFoundError() {
     return {
@@ -56,5 +63,6 @@ function conflictError(message) {
     invalidCredentialsError,
     appointmentUnauthorized,
     appointmentIsCanceled,
+    appointmentIsDone
   };
   

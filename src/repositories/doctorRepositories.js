@@ -44,11 +44,10 @@ async function findById(id){
 async function search({ name, specialty, location }){
     return await connectionDb.query(
         `
-        SELECT *
-        FROM   doctors
-        WHERE  NAME = $1
-                OR specialty = $2
-                OR location = $3 
+        SELECT * FROM doctors
+        WHERE (name ILIKE '%' || $1 || '%' OR $1 = '')
+        AND (specialty ILIKE '%' || $2 || '%' OR $2 = '')
+        AND (location ILIKE '%' || $3 || '%' OR $3 = '');
         `,
         [name, specialty, location]
     );
